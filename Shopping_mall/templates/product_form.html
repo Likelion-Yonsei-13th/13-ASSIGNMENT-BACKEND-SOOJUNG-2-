@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+  <h2>{{ product.name|default:"상품 등록" }}</h2>
+
+  <form method="POST" class="product-form">
+    {% csrf_token %}
+    
+    <label for="name">상품명:</label>
+    <input type="text" id="name" name="name" value="{{ product.name|default:'' }}">
+
+    <label for="description">상품 설명:</label>
+    <textarea id="description" name="description">{{ product.description|default:'' }}</textarea>
+
+    <label for="price">가격:</label>
+    <input type="number" id="price" name="price" value="{{ product.price|default:'' }}">
+
+    <button type="submit" class="btn btn-green">저장</button>
+  </form>
+
+  <a href="{% url 'shop:product_list' %}" class="btn btn-gray" style="margin-top: 20px; display:inline-block;">← 목록으로</a>
+</div>
+{% endblock %}

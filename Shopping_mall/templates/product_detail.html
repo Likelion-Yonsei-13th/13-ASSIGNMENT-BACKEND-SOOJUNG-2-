@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+  <div class="card">
+    <h1>{{ product.name }}</h1>
+
+    <div class="price">
+      <span>💰</span>{{ product.price }}<span style="color: #16a34a;">원</span>
+    </div>
+
+    <div class="description">
+      {{ product.description }}
+    </div>
+
+    <div class="btn-group">
+      <a href="{% url 'shop:product_update' product.pk %}" class="btn btn-blue">수정</a>
+
+      <form action="{% url 'shop:product_delete' product.pk %}" method="post" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-red">삭제</button>
+      </form>
+
+      <a href="{% url 'shop:product_list' %}" class="btn btn-gray">목록으로</a>
+    </div>
+  </div>
+</div>
+{% endblock %}
